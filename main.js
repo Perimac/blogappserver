@@ -19,6 +19,7 @@ server.listen(port,function(){
         server.post('/register',controller.signUpUser);
         server.patch('/fpwd/:userName',controller.forgotPassword);
         server.delete('/deluser/:userName',controller.deleteUser);
+        server.post('/login',controller.signInUser);
 
     }).catch(function(err){console.log(err.message);});
 

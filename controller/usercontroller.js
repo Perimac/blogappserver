@@ -15,6 +15,23 @@ async function signUpUser(req, res) {
     }
 }
 
+async function signInUser(req, res) {
+    try {
+        const criteria = req.body.userName;
+        const result = await User.findOne({userName: criteria});
+        if(result === null) {
+            return res.status(403).json({message:'User does not exist'});
+        }
+        if(result.userPassword != req.body.userPassword){ 
+            return res.status(403).json({message: 'Invalid user password'});
+        }
+        res.status(200).json({success:true,data:result});
+    } catch (error) {
+        res.status(500).json({success: false, message: error.message});
+    }
+}
+
+
 async function forgotPassword(req, res) {
     try {
         const criteria = req.params.userName;
@@ -37,4 +54,4 @@ async function deleteUser(req, res) {
 }
 
 
-module.exports = {signUpUser,forgotPassword,deleteUser};
+module.exports = {signUpUser,forgotPassword,deleteUser,signInUser};
