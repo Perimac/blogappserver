@@ -1,5 +1,6 @@
 const User = require('../model/usermodel');
-
+const config = require('../services/config');
+const jwt = require('jsonwebtoken');
 
 async function signUpUser(req, res) {
     try {
@@ -15,7 +16,17 @@ async function signUpUser(req, res) {
     }
 }
 
-async function signInUser(req, res) {
+async function getUser(req, res){
+    try {
+        const criteria = req.params.userName;
+        const result = await User.findOne({userName: criteria});
+        res.status(200).json({success: true,data: result});
+    } catch (error) {
+        res.status(500).json({success: false, message: error.message});
+    }
+}
+
+async function loginUser(req, res) {
     try {
         const criteria = req.body.userName;
         const result = await User.findOne({userName: criteria});
@@ -25,7 +36,13 @@ async function signInUser(req, res) {
         if(result.userPassword != req.body.userPassword){ 
             return res.status(403).json({message: 'Invalid user password'});
         }
-        res.status(200).json({success:true,data:result});
+        //JSONWEBTOKEN GOES HERE
+        let userToken = jwt.sign({payload: req.params.userName}, //it can be the whole user object or just userName or anything in your req.body
+             config.sk,
+             {expiresIn: "24h"} // this means the token wil expire after 24hours or a whole day
+            )
+        res.status(200).json({success:true,token:userToken});
+
     } catch (error) {
         res.status(500).json({success: false, message: error.message});
     }
@@ -54,4 +71,4 @@ async function deleteUser(req, res) {
 }
 
 
-module.exports = {signUpUser,forgotPassword,deleteUser,signInUser};
+module.exports = {signUpUser,forgotPassword,deleteUser,loginUser,getUser};

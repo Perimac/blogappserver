@@ -3,6 +3,8 @@ const express = require('express');
 const server = express();
 const mongoose = require('mongoose');
 const controller = require('./controller/usercontroller');
+const middleware = require('./services/middleware');
+
 
 const port = process.env.PORT || 6999;
 
@@ -19,7 +21,8 @@ server.listen(port,function(){
         server.post('/register',controller.signUpUser);
         server.patch('/fpwd/:userName',controller.forgotPassword);
         server.delete('/deluser/:userName',controller.deleteUser);
-        server.post('/login',controller.signInUser);
+        server.post('/login',controller.loginUser);
+        server.get('/user/:userName',middleware.verifyToken,controller.getUser);
 
     }).catch(function(err){console.log(err.message);});
 
