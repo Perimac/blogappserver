@@ -11,7 +11,7 @@ server.listen(port,function(){
     .then(function(){
         console.log('ATLAS CONNECTED...');
         server.use(express.json());
-        server.use('/users',userRoutes);
+        server.use(userRoutes);
 
     }).catch(function(err){console.log(err.message);});
 });
