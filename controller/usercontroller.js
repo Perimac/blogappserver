@@ -26,6 +26,17 @@ async function getUser(req, res){
     }
 }
 
+async function getAllUsers(req,res) {
+    try {
+        const result = await User.find({});
+        // const sliced = result.slice(0,2);
+        res.status(200).json({success:true, data:result});
+    } catch (error) {
+        res.status(404).json({success: false, message: error.message});
+    }
+}
+
+
 async function loginUser(req, res) {
     try {
         const criteria = req.body.userName;
@@ -71,4 +82,11 @@ async function deleteUser(req, res) {
 }
 
 
-module.exports = {signUpUser,forgotPassword,deleteUser,loginUser,getUser};
+module.exports = {
+    signUpUser,
+    forgotPassword,
+    deleteUser,
+    loginUser,
+    getUser,
+    getAllUsers
+};
