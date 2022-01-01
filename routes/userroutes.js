@@ -5,7 +5,7 @@ const middleware = require('../services/middleware');
 
 
 //ALL USER ROUTES
-router.get('/',function(req,res){res.json('Server Initialised');});
+router.get('/',function(req,res){res.json('Welcome to Perimac API');});
 
 router.post('/register',controller.signUpUser);
 router.patch('/fpwd/:userName',controller.forgotPassword);
