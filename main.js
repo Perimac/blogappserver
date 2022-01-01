@@ -7,7 +7,7 @@ const port = process.env.PORT || 6999;
 
 server.listen(port,function(){
     console.log('server init...');
-    mongoose.connect(process.env.ATLAS_DB_URL,{useNewUrlParser:true,useUnifiedTopology:true})
+    mongoose.connect(process.env.ATLAS_DB_URL)
     .then(function(){
         console.log('ATLAS CONNECTED...');
         server.use(express.json());
