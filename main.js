@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({path: '.env'});
 const express = require('express');
 const server = express();
 const mongoose = require('mongoose');
@@ -14,5 +14,4 @@ server.listen(port,function(){
         server.use('/users',userRoutes);
 
     }).catch(function(err){console.log(err.message);});
-
 });
