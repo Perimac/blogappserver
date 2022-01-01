@@ -6,7 +6,9 @@
   "scripts": {
     "server": "nodemon main.js"
   },
-  "keywords": [],
+  "keywords": [
+    "heroku"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
