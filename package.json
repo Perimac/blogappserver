@@ -4,8 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "server": "nodemon main.js",
-    "start": "node main.js"
+    "app": "nodemon main.js"
   },
   "keywords": [
     "heroku"
@@ -22,6 +21,5 @@
   "engines": {
     "node": "14.x"
   }
-
 
 }
