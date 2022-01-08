@@ -10,8 +10,8 @@ router.post('/register',controller.signUpUser);
 router.patch('/fpwd/:userName',controller.forgotPassword);
 router.delete('/deluser/:userName',controller.deleteUser);
 router.post('/login',controller.loginUser);
-router.get('/user/:userName',middleware.verifyToken,controller.getUser);
-router.get('/all',middleware.verifyToken,controller.getAllUsers);
+router.get('/user/:userName',controller.getUser);
+router.get('/all',controller.getAllUsers);
 
 module.exports = router;
 
